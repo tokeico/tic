@@ -29,9 +29,10 @@ services:
       DATABASE_URL: postgres://tic:tic@db:5432/tic
       WEB_ORIGIN: http://localhost:8080
       PORT: 3000
-      OLLAMA_URL: http://host.docker.internal:11434
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+      # Ollama is off for now (tic-api/src/llm/provider.ts). To re-enable:
+      # OLLAMA_URL: http://host.docker.internal:11434
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
 
   web:
     build: ./tic-web
@@ -39,7 +40,7 @@ services:
     depends_on:
       - api
     environment:
-      API_ORIGIN: https://geotropic-preseminal-syble.ngrok-free.dev
+      API_ORIGIN: http://api:3000
     ports:
       - "8080:3000"
 
